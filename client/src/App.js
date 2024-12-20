@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import config from './config';
 
 function App() {
   const [playlistUrl, setPlaylistUrl] = useState('');
@@ -30,7 +31,7 @@ function App() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:4000/login');
+      const response = await fetch(`${config.apiUrl}/login`);
       const data = await response.json();
       window.location.href = data.url;
     } catch (error) {
@@ -55,7 +56,7 @@ function App() {
         throw new Error('Please enter a playlist URL and name');
       }
 
-      const response = await fetch('http://localhost:4000/convert', {
+      const response = await fetch(`${config.apiUrl}/convert`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
