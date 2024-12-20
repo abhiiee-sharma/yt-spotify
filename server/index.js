@@ -41,7 +41,8 @@ app.get('/callback', async (req, res) => {
     const userData = await spotifyService.handleCallback(code);
     
     console.log('[Server] Authentication successful, redirecting to frontend');
-    const redirectUrl = `http://localhost:3000/callback?` + 
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+    const redirectUrl = `${frontendUrl}/callback?` + 
       `accessToken=${userData.accessToken}&` +
       `refreshToken=${userData.refreshToken}&` +
       `userId=${userData.userId}&` +
